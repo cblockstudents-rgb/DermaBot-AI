@@ -5,6 +5,35 @@ st.set_page_config(
     page_icon="🧴",
     layout="wide"
 )
+st.markdown("""
+<style>
+
+.stApp {
+    background-color: #F0F4EA;
+}
+
+[data-testid="stSidebar"] {
+    background-color: #E5EBDD;
+}
+
+h1, h2, h3 {
+    color: #294D3A !important;
+    font-family: Georgia, serif;
+    font-weight: 700;
+}
+
+[data-testid="stSidebar"] h1,
+[data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3 {
+    color: #294D3A !important;
+}
+
+p {
+    color: #455B4B;
+}
+
+</style>
+""", unsafe_allow_html=True)
 
 st.title("🧴 DermaBot AI")
 st.subheader("Your Personal Skincare Guide")
