@@ -2,7 +2,7 @@ import streamlit as st
 
 st.set_page_config(
     page_title="DermaBot AI",
-    page_icon="🧴",
+    page_icon="assets/dermabot_logo.png",
     layout="wide"
 )
 st.markdown("""
@@ -43,7 +43,13 @@ p {
 </style>
 """, unsafe_allow_html=True)
 
-st.title("🧴 DermaBot AI")
+logo_col, title_col = st.columns([1,3])
+
+with logo_col:
+    st.image("assets/dermabot_logo.png", width=120)
+
+with title_col:
+    st.title("DermaBot AI")
 st.subheader("Your Personal Skincare Guide")
 st.write("Explore skincare information and build a simple skincare routine.")
 
@@ -253,7 +259,7 @@ div[role="radiogroup"] label:has(input:checked) {
 
 
 if page == "Home":
-
+    
     st.markdown("""
     <div style="
         background: linear-gradient(135deg, #F3E3DC, #FFF1E8);
