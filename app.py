@@ -221,246 +221,179 @@ if page == "Home":
     </div>
     """, unsafe_allow_html=True)
 
-
-
+  
 elif page == "Skincare FAQ":
 
+    
     st.markdown("""
-    <h1 style="
-        color: #294D3A;
-        font-family: Georgia, serif;
-        font-size: 32px;
-    ">
+    <h1 style="color:#59483F; font-family:Georgia,serif;">
         💬 Skincare Frequently Asked Questions
     </h1>
-    <p style="color: #66866C; font-size: 16px;">
-        Simple answers to help you understand everyday skincare.
+    <p style="color:#8B7568; font-size:16px;">
+        Your little knowledge corner for everyday skincare.
     </p>
     """, unsafe_allow_html=True)
 
     faqs = {
         "What is a basic skincare routine?":
-        "A basic routine includes a gentle cleanser, moisturiser and broad-spectrum sunscreen.",
+        "A basic skincare routine has three important steps: gentle cleansing, moisturising and applying broad-spectrum SPF 30+ sunscreen during the day. Consistency is more important than using lots of products.",
 
         "Why is sunscreen important?":
-        "Sunscreen helps protect skin from harmful UV radiation. Choose broad-spectrum SPF 30 or higher.",
+        "Sunscreen helps protect your skin from ultraviolet (UV) radiation. Broad-spectrum sunscreen protects against UVA and UVB rays. SPF 30 or higher is generally recommended for everyday use.",
 
         "How often should I wash my face?":
-        "Generally, wash your face twice daily and after sweating.",
+        "For most people, washing gently twice a day and after sweating is sufficient. Excessive washing and harsh scrubbing can irritate the skin.",
 
-        "What is moisturiser?":
-        "Moisturiser helps maintain the skin's moisture barrier.",
+        "Why do we need moisturiser?":
+        "Moisturiser helps maintain the skin barrier and reduce moisture loss. Different formulations are available for different skin types.",
 
         "What is a patch test?":
-        "A patch test involves trying a small amount of a new product on a small area of skin first.",
+        "A patch test means trying a small amount of a new skincare product on a small area of skin first. Follow the product instructions and stop using it if irritation develops.",
+
+        "What is the difference between UVA and UVB?":
+        "UVA rays contribute to skin ageing and can penetrate deeper into the skin. UVB rays are a major cause of sunburn. Broad-spectrum sunscreen helps protect against both.",
+
+        "What is acne?":
+        "Acne is a common skin condition that develops when hair follicles become blocked. It can involve blackheads, whiteheads and inflamed spots. A dermatologist can help with persistent acne.",
+
+        "What are blackheads and whiteheads?":
+        "Both are types of clogged pores. Blackheads are open at the surface, while whiteheads are closed. They are common forms of non-inflammatory acne.",
+
+        "What is hyaluronic acid?":
+        "Hyaluronic acid is a humectant, an ingredient that helps attract and retain water. It is commonly included in moisturisers and hydrating skincare products.",
+
+        "What is niacinamide?":
+        "Niacinamide is a form of vitamin B3 used in skincare products. It is studied for its role in supporting the skin barrier and improving the appearance of uneven skin tone.",
+
+        "What are ceramides?":
+        "Ceramides are lipids naturally found in the skin barrier. Skincare products containing ceramides are designed to support the skin barrier and reduce moisture loss.",
 
         "Can I use multiple skincare products?":
-        "Introduce new products gradually. A simple routine is often a good starting point."
+        "You can use more than one skincare product, but introduce new products gradually. A simple routine is often a good starting point. Using too many products can sometimes cause irritation.",
+
+        "Does drinking water cure acne?":
+        "Drinking enough water supports general health, but water alone does not cure acne. Persistent or concerning acne should be discussed with a dermatologist.",
+
+        "Can skincare products expire?":
+        "Yes. Skincare products can change over time. Check the expiry date and the period-after-opening symbol on packaging. Avoid using products that have changed in smell, colour or texture.",
+
+        "What should I do if a product irritates my skin?":
+        "Stop using the product if it causes irritation. Keep your routine gentle and seek medical advice if the reaction is severe, persistent or concerning."
     }
 
-    st.markdown(
-        "<h4 style='color: #294D3A;'>Choose Your Question</h4>",
-        unsafe_allow_html=True
-    )
+    st.markdown("### 🌸 Explore Common Questions")
 
     question = st.selectbox(
-        "Select a skincare topic:",
-        list(faqs.keys())
+        "Choose a question:",
+        list(faqs.keys()),
+        key="faq_question_select"
     )
 
-    st.markdown(
-        "<h4 style='color: #294D3A;'>Or Ask Your Own Question</h4>",
-        unsafe_allow_html=True
-    )
+    st.markdown("### 🔎 Ask DermaBot")
 
     user_question = st.text_input(
-        "Type your skincare question here:",
-        placeholder="e.g. Why is moisturiser important?"
+        "Or type your own skincare question:",
+        placeholder="Example: What does niacinamide do?",
+        key="faq_custom_question"
     )
 
-    if st.button("Get Answer"):
+    if st.button("✨ Get My Answer", key="faq_answer_button"):
 
         answer = faqs[question]
 
         if user_question.strip():
+
             q = user_question.lower()
 
-            if "sunscreen" in q or "spf" in q:
+            if "sunscreen" in q or "spf" in q or "uv" in q or "sun protection" in q:
                 answer = faqs["Why is sunscreen important?"]
 
-            elif "moisturiser" in q or "moisturizer" in q:
-                answer = faqs["What is moisturiser?"]
+            elif "hyaluronic" in q:
+                answer = faqs["What is hyaluronic acid?"]
 
-            elif "cleanser" in q or "face wash" in q:
-                answer = "A gentle cleanser helps remove dirt, oil and impurities from the skin."
+            elif "niacinamide" in q or "vitamin b3" in q:
+                answer = faqs["What is niacinamide?"]
 
-            elif "routine" in q:
-                answer = faqs["What is a basic skincare routine?"]
+            elif "ceramide" in q:
+                answer = faqs["What are ceramides?"]
 
-            elif "patch test" in q:
-                answer = faqs["What is a patch test?"]
+            elif "blackhead" in q or "whitehead" in q:
+                answer = faqs["What are blackheads and whiteheads?"]
 
-            elif "wash" in q:
+            elif "acne" in q or "pimple" in q or "breakout" in q:
+                answer = faqs["What is acne?"]
+
+            elif "moistur" in q or "hydration" in q:
+                answer = faqs["Why do we need moisturiser?"]
+
+            elif "cleanser" in q or "face wash" in q or "wash face" in q:
                 answer = faqs["How often should I wash my face?"]
 
-            else:
-                answer = "I don't have a prepared answer for this question yet. Please try asking about sunscreen, moisturiser, cleanser or skincare routines."
+            elif "patch test" in q or "new product test" in q:
+                answer = faqs["What is a patch test?"]
 
-        st.markdown("""
-        <div style="
-            background-color: #E5EBDD;
-            border: 1px solid #C8D8C5;
-            border-left: 5px solid #66866C;
-            padding: 20px;
-            border-radius: 12px;
-            margin-top: 15px;
-        ">
-            <h4 style="color: #294D3A; margin-top: 0;">
-                🌿 Your Answer
-            </h4>
-        """ + "<p style='color: #26382D; font-size: 16px;'>" +
-        answer + "</p></div>", unsafe_allow_html=True)
+            elif "expire" in q or "expiry" in q:
+                answer = faqs["Can skincare products expire?"]
 
+            elif "irritat" in q or "reaction" in q:
+                answer = faqs["What should I do if a product irritates my skin?"]
 
+            elif "routine" in q or "steps" in q:
+                answer = faqs["What is a basic skincare routine?"]
 
-elif page == "Skincare FAQ":
+            elif "multiple products" in q or "many products" in q:
+                answer = faqs["Can I use multiple skincare products?"]
 
-    st.markdown("""
-    <h1 style="
-        color: #294D3A;
-        font-family: Georgia, serif;
-        font-size: 32px;
-    ">
-        💬 Skincare Frequently Asked Questions
-    </h1>
-    <p style="color: #66866C; font-size: 16px;">
-        Simple answers to help you understand everyday skincare.
-    </p>
-    """, unsafe_allow_html=True)
+            elif "water" in q:
+                answer = faqs["Does drinking water cure acne?"]
 
-    faqs = {
-        "What is a basic skincare routine?":
-        "A basic routine includes a gentle cleanser, "
-        "moisturiser and broad-spectrum sunscreen.",
-
-        "Why is sunscreen important?":
-        "Sunscreen helps protect skin from harmful UV radiation. "
-        "Choose broad-spectrum SPF 30 or higher.",
-
-        "How often should I wash my face?":
-        "Generally, wash your face twice daily and after sweating.",
-
-        "What is moisturiser?":
-        "Moisturiser helps maintain the skin's moisture barrier.",
-
-        "What is a patch test?":
-        "A patch test involves trying a small amount of a "
-        "new product on a small area of skin first.",
-
-        "Can I use multiple skincare products?":
-        "Introduce new products gradually. A simple routine "
-        "is often a good starting point."
-    }
-
-    st.markdown(
-        "<h4 style='color: #294D3A;'>Choose Your Question</h4>",
-        unsafe_allow_html=True
-    )
-
-    question = st.selectbox(
-        "Select a skincare topic:",
-        list(faqs.keys())
-    )
-
-    st.markdown(
-        "<h4 style='color: #294D3A;'>Or Ask Your Own Question</h4>",
-        unsafe_allow_html=True
-    )
-
-    user_question = st.text_input(
-        "Type your skincare question here:",
-        placeholder="e.g. Why is moisturiser important?"
-    )
-
-    if st.button("Get Answer"):
-
-        answer = faqs[question]
-
-        if user_question.strip():
-            q = user_question.lower()
-
-            if "sunscreen" in q:
-                answer = "Sunscreen helps protect your skin from harmful UV radiation. Broad-spectrum SPF 30 or higher is generally recommended."
-
-            elif "moisturiser" in q or "moisturizer" in q:
-                answer = "Moisturiser helps maintain your skin's moisture barrier and prevent dryness."
-
-            elif "cleanser" in q or "face wash" in q:
-                answer = "A gentle cleanser helps remove dirt, oil and impurities from the skin."
-
-            elif "routine" in q:
-                answer = "A basic skincare routine includes cleansing, moisturising and applying sunscreen during the day."
+            elif "uva" in q or "uvb" in q:
+                answer = faqs["What is the difference between UVA and UVB?"]
 
             else:
-                answer = "I don't have a prepared answer for this question yet. Please try asking about sunscreen, moisturiser, cleanser or skincare routines."
+                answer = None
 
-        st.markdown("""
-        <div style="
-            background-color: #E5EBDD;
-            border: 1px solid #C8D8C5;
-            border-left: 5px solid #66866C;
-            padding: 20px;
-            border-radius: 12px;
-            margin-top: 15px;
-        ">
-            <h4 style="color: #294D3A; margin-top: 0;">
-                🌿 Your Answer
-            </h4>
-        """ + "<p style='color: #26382D; font-size: 16px;'>" +
-        answer + "</p></div>", unsafe_allow_html=True)
-    
-
-    st.divider()
-
-    st.subheader("Ask DermaBot")
-
-    user_question = st.text_input(
-        "Type a skincare question:"
-    )
-
-    if st.button("Ask"):
-        q = user_question.lower()
-
-        if "sunscreen" in q or "spf" in q:
-            st.write(faqs["Why is sunscreen important?"])
-
-        elif "moistur" in q:
-            st.write(faqs["What is moisturiser?"])
-
-        elif "wash" in q or "cleanser" in q:
-            st.write(faqs["How often should I wash my face?"])
-
-        elif "routine" in q:
-            st.write(faqs["What is a basic skincare routine?"])
-
-        elif "patch test" in q:
-            st.write(faqs["What is a patch test?"])
+        if answer:
+            st.markdown("### 🌿 Your Answer")
+            st.success(answer)
 
         else:
             st.info(
-                "I don't have a verified answer for this question yet. "
-                "Please consult a qualified dermatologist for "
-                "personal skin concerns."
+                "I don't have a verified answer for that question yet. "
+                "Try asking about sunscreen, acne, moisturiser, "
+                "ingredients or skincare basics. For personal skin "
+                "concerns, consult a qualified dermatologist."
             )
 
+    st.divider()
+
+    st.markdown("### 🌷 A Little Reminder")
+
+    st.caption(
+        "Skincare information is educational and cannot replace "
+        "professional medical advice or a dermatologist's diagnosis."
+    )
+
+
 # Routine Generator
+
 elif page == "Routine Generator":
 
-    st.header("🌿 Skincare Routine Generator")
+    st.markdown("""
+    <h1 style="color:#59483F; font-family:Georgia,serif;">
+        🌿 Your Personal Skincare Routine
+    </h1>
+    <p style="color:#8B7568; font-size:16px;">
+        A simple routine based on your skin type and concerns.
+    </p>
+    """, unsafe_allow_html=True)
+
+    st.markdown("### 🌷 Tell Us About Your Skin")
 
     skin_type = st.selectbox(
         "Select your skin type:",
-        ["Normal", "Dry", "Oily", "Combination", "Sensitive", "Not sure"]
+        ["Normal", "Dry", "Oily", "Combination", "Sensitive", "Not sure"],
+        key="routine_skin_type"
     )
 
     concern = st.selectbox(
@@ -472,90 +405,230 @@ elif page == "Routine Generator":
             "Occasional pimples",
             "Uneven skin tone",
             "Sensitivity"
-        ]
+        ],
+        key="routine_concern"
     )
 
-    if st.button("Generate My Routine"):
+    if st.button("✨ Generate My Routine", key="generate_routine"):
 
-        st.subheader("Your Basic Skincare Routine")
+        st.markdown("## 🌿 Your Personalised Results")
 
-        st.markdown("""
-        **☀️ Morning Routine**
+        # Skin-type guidance
+        skin_tips = {
+            "Dry": "Focus on maintaining skin hydration. Choose a gentle cleanser and a moisturiser that supports the skin barrier.",
+            "Oily": "Choose lightweight, non-comedogenic products. Avoid repeatedly washing your face to remove oil.",
+            "Combination": "Keep your routine balanced. Different areas of your face may feel comfortable with different product textures.",
+            "Sensitive": "Choose gentle, fragrance-free products. Introduce new products one at a time.",
+            "Normal": "Maintain a simple routine with gentle cleansing, moisturising and sun protection.",
+            "Not sure": "Begin with a simple routine and notice how your skin responds to different products."
+        }
 
-        1. Gentle cleanser.
-        2. Suitable moisturiser.
-        3. Broad-spectrum SPF 30+ sunscreen.
+        # Concern-specific guidance
+        concern_tips = {
+            "No major concern": "Maintain consistent basic skincare instead of adding unnecessary products.",
+            "Dryness": "Use a gentle cleanser and moisturise regularly, especially after washing your face.",
+            "Oiliness": "Avoid harsh cleansers and choose lightweight skincare products.",
+            "Occasional pimples": "Avoid picking pimples. Use gentle skincare and seek professional advice if breakouts persist.",
+            "Uneven skin tone": "Daily broad-spectrum sunscreen is an important part of protecting your skin from sun exposure.",
+            "Sensitivity": "Avoid products that cause irritation. Keep your routine simple and fragrance-free."
+        }
 
-        **🌙 Night Routine**
+        # Morning routine variations
+        morning_tips = {
+            "Dry": "Use a gentle cleanser, apply a moisturiser and finish with broad-spectrum SPF 30+ sunscreen.",
+            "Oily": "Cleanse gently, apply a lightweight moisturiser and finish with broad-spectrum SPF 30+ sunscreen.",
+            "Combination": "Use a gentle cleanser, apply a comfortable moisturiser and finish with broad-spectrum SPF 30+ sunscreen.",
+            "Sensitive": "Use a mild cleanser or rinse gently with water, apply a fragrance-free moisturiser and finish with a suitable SPF 30+ sunscreen.",
+            "Normal": "Cleanse gently, moisturise and apply broad-spectrum SPF 30+ sunscreen.",
+            "Not sure": "Start with gentle cleansing, a suitable moisturiser and broad-spectrum SPF 30+ sunscreen."
+        }
 
-        1. Gentle cleanser.
-        2. Suitable moisturiser.
-        """)
+        # Night routine variations
+        night_tips = {
+            "Dry": "Gently cleanse your face and apply a moisturiser that helps reduce moisture loss.",
+            "Oily": "Remove the day's dirt and sunscreen with a gentle cleanser, then apply a lightweight moisturiser.",
+            "Combination": "Cleanse gently and apply a moisturiser that feels comfortable on your skin.",
+            "Sensitive": "Use a gentle cleanser and a fragrance-free moisturiser. Avoid introducing several new products together.",
+            "Normal": "Cleanse gently to remove the day's dirt and sunscreen, then moisturise.",
+            "Not sure": "Keep your evening routine simple with gentle cleansing and moisturising."
+        }
 
-        if skin_type == "Dry":
-            st.write("Tip: Choose a gentle, fragrance-free moisturiser.")
+        st.markdown("### ☀️ Your Morning Routine")
+        st.success(morning_tips[skin_type])
 
-        elif skin_type == "Oily":
-            st.write("Tip: Consider a lightweight, non-comedogenic moisturiser.")
+        st.markdown("### 🌙 Your Night Routine")
+        st.info(night_tips[skin_type])
 
-        elif skin_type == "Sensitive":
-            st.write("Tip: Prefer fragrance-free products and introduce new products slowly.")
+        st.markdown("### 🌸 Guidance for Your Main Concern")
+        st.write(concern_tips[concern])
 
-        elif skin_type == "Combination":
-            st.write("Tip: Choose a gentle routine suitable for different skin areas.")
+        st.markdown("### 🌿 Why This Routine?")
+        st.write(skin_tips[skin_type])
+        st.write("Your selected concern is **" + concern + "**, so the routine also includes guidance related to that concern.")
 
-        if concern == "Occasional pimples":
-            st.info("Avoid picking pimples. Seek professional advice if acne persists.")
+        st.markdown("### 🚫 Things to Keep in Mind")
 
-        elif concern == "Sensitivity":
-            st.info("Keep your routine simple and avoid products that cause irritation.")
+        if skin_type == "Sensitive" or concern == "Sensitivity":
+            st.warning("Avoid products that cause irritation. Introduce new products one at a time.")
 
-        elif concern == "Dryness":
-            st.info("Use a gentle cleanser and moisturise regularly.")
+        elif skin_type == "Oily" or concern == "Oiliness":
+            st.warning("Avoid harsh cleansing and excessive washing. These can irritate your skin.")
+
+        elif skin_type == "Dry" or concern == "Dryness":
+            st.warning("Avoid very hot water and harsh cleansers that may leave your skin feeling dry.")
+
+        else:
+            st.info("Avoid adding too many products at once. A simple, consistent routine is a good starting point.")
 
         st.caption(
-            "This is general educational guidance, not a medical prescription."
+            "🌷 This tool provides general skincare education, "
+            "not medical diagnosis or treatment. Consult a dermatologist "
+            "for persistent or concerning skin problems."
         )
 
+
+
 # Skin Concerns
+
 elif page == "Skin Concerns":
 
-    st.header("🔍 Common Skin Concerns")
+    st.markdown("""
+    <h1 style="color:#59483F; font-family:Georgia,serif;">
+        🔍 Understanding Your Skin
+    </h1>
+    <p style="color:#8B7568;">
+        Explore common skin concerns and learn about gentle skincare practices.
+    </p>
+    """, unsafe_allow_html=True)
 
     concerns = {
-        "Dry Skin":
-        "Skin may feel tight, rough or flaky. Gentle cleansing "
-        "and regular moisturising can help.",
+        "Dry Skin": {
+            "meaning": "Dry skin occurs when the skin does not retain enough moisture. It may feel tight, rough or flaky.",
+            "factors": [
+                "Cold or dry weather",
+                "Frequent washing with harsh cleansers",
+                "Hot showers",
+                "Products that irritate or dry the skin"
+            ],
+            "care": [
+                "Use a gentle, non-stripping cleanser.",
+                "Apply a suitable moisturiser regularly.",
+                "Avoid very hot water.",
+                "Moisturise after bathing while the skin is slightly damp."
+            ],
+            "avoid": "Harsh soaps, excessive exfoliation and very hot water."
+        },
 
-        "Oily Skin":
-        "Skin may appear shiny due to excess oil. Gentle cleansing "
-        "and non-comedogenic moisturisers may help.",
+        "Oily Skin": {
+            "meaning": "Oily skin produces more sebum, the natural oil made by sebaceous glands. It may appear shiny, particularly around the forehead, nose and chin.",
+            "factors": [
+                "Genetics",
+                "Hormonal changes",
+                "Environmental conditions",
+                "Some skincare or cosmetic products"
+            ],
+            "care": [
+                "Cleanse gently without scrubbing.",
+                "Choose lightweight, non-comedogenic moisturisers.",
+                "Use suitable broad-spectrum sunscreen.",
+                "Avoid repeatedly washing your face."
+            ],
+            "avoid": "Harsh cleansers and excessive washing to remove natural skin oils."
+        },
 
-        "Acne":
-        "Acne is a common skin condition. Avoid picking spots "
-        "and consult a dermatologist if it is persistent or painful.",
+        "Acne": {
+            "meaning": "Acne is a common skin condition involving blocked hair follicles. It can appear as blackheads, whiteheads and inflamed spots.",
+            "factors": [
+                "Excess sebum production",
+                "Blocked hair follicles",
+                "Hormonal changes",
+                "Genetic factors"
+            ],
+            "care": [
+                "Cleanse gently.",
+                "Choose non-comedogenic skincare products.",
+                "Avoid picking or squeezing spots.",
+                "Maintain a consistent, simple routine."
+            ],
+            "avoid": "Scrubbing, picking spots and trying several new products at once."
+        },
 
-        "Sensitive Skin":
-        "Sensitive skin may react to certain products. "
-        "Fragrance-free products may be easier to tolerate.",
+        "Sensitive Skin": {
+            "meaning": "Sensitive skin may react easily to certain skincare products or environmental conditions. It may feel uncomfortable, itchy or irritated.",
+            "factors": [
+                "Fragrance in certain products",
+                "Environmental changes",
+                "Harsh cleansing products",
+                "Individual skin barrier differences"
+            ],
+            "care": [
+                "Choose gentle, fragrance-free products.",
+                "Introduce new products one at a time.",
+                "Try a small-area patch test before using a new product.",
+                "Keep your skincare routine simple."
+            ],
+            "avoid": "Products that cause irritation and unnecessary product layering."
+        },
 
-        "Uneven Skin Tone":
-        "Uneven skin tone can have several causes. "
-        "Sun protection is an important part of skin care."
+        "Uneven Skin Tone": {
+            "meaning": "Uneven skin tone refers to areas of skin that appear darker or differently coloured than surrounding areas.",
+            "factors": [
+                "Sun exposure",
+                "Post-inflammatory changes after skin irritation",
+                "Hormonal influences",
+                "Individual skin characteristics"
+            ],
+            "care": [
+                "Use broad-spectrum SPF 30+ sunscreen.",
+                "Avoid picking or irritating the skin.",
+                "Choose gentle skincare products.",
+                "Seek professional advice if changes are new or concerning."
+            ],
+            "avoid": "Unverified skin-lightening products and harsh home remedies."
+        }
     }
 
     selected = st.selectbox(
-        "Choose a skin concern:",
-        list(concerns.keys())
+        "🌸 Select a skin concern:",
+        list(concerns.keys()),
+        key="skin_concern_select"
     )
 
-    st.write(concerns[selected])
+    details = concerns[selected]
 
-    st.warning(
-        "DermaBot cannot diagnose skin conditions. "
-        "For persistent, painful or worsening symptoms, "
-        "consult a qualified dermatologist."
+    st.markdown("---")
+
+    st.markdown("### 📖 Understanding the Concern")
+    st.write(details["meaning"])
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.markdown("### 🔎 Common Contributing Factors")
+        for factor in details["factors"]:
+            st.markdown("- " + factor)
+
+    with col2:
+        st.markdown("### 🌿 Everyday Care")
+        for tip in details["care"]:
+            st.markdown("- " + tip)
+
+    st.markdown("### 🚫 What to Avoid")
+    st.warning(details["avoid"])
+
+    st.markdown("### 💡 Did You Know?")
+    st.info(
+        "Skin can change over time due to age, hormones, weather "
+        "and environmental conditions. A skincare routine should "
+        "be gentle and adjusted according to comfort."
     )
+
+    st.caption(
+        "DermaBot provides general skincare education, not diagnosis "
+        "or treatment. Consult a qualified dermatologist for persistent, "
+        "painful or worsening skin concerns."
+    )
+
 
 st.divider()
 
