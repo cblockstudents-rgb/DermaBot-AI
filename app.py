@@ -43,10 +43,10 @@ p {
 </style>
 """, unsafe_allow_html=True)
 
-logo_col, title_col = st.columns([1,3])
+logo_col, title_col = st.columns([0.8, 4], gap="small")
 
 with logo_col:
-    st.image("assets/dermabot_logo.png", width=120)
+    st.image("assets/dermabot_logo.png", width=110)
 
 with title_col:
     st.title("DermaBot AI")
