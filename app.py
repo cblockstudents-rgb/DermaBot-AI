@@ -195,6 +195,57 @@ hr {
     transition: background-color 0.3s ease;
 }
 
+
+/* Top navigation menu */
+div[role="radiogroup"] {
+    background-color: #F3E3DC;
+    padding: 12px;
+    border-radius: 14px;
+    border: 1px solid #E8D5CA;
+    gap: 10px;
+}
+/* Responsive navigation */
+div[role="radiogroup"] {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Navigation option spacing */
+div[role="radiogroup"] label {
+    flex: 1 1 auto;
+    justify-content: center;
+    min-width: 110px;
+    text-align: center;
+}
+
+/* Smaller screens */
+@media (max-width: 600px) {
+    div[role="radiogroup"] {
+        padding: 8px;
+        gap: 8px;
+    }
+
+    div[role="radiogroup"] label {
+        min-width: 42%;
+        padding: 10px 6px;
+        font-size: 13px;
+    }
+}
+/* Navigation labels */
+div[role="radiogroup"] label {
+    background-color: #FFFCF8;
+    border: 1px solid #E8D5CA;
+    border-radius: 10px;
+    padding: 8px 14px;
+    transition: 0.2s ease;
+}
+
+/* Selected navigation option */
+div[role="radiogroup"] label:has(input:checked) {
+    background-color: #A3B18A;
+    border-color: #A3B18A;
+}
 </style>
 """, unsafe_allow_html=True)
 
