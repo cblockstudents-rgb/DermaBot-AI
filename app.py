@@ -85,15 +85,29 @@ st.sidebar.markdown("""
 </p>
 """, unsafe_allow_html=True)
 
-page = st.sidebar.radio(
-    "Choose a feature",
-    [
-        "Home",
-        "Skincare FAQ",
-        "Routine Generator",
-        "Skin Concerns"
-    ]
-)
+
+if st.session_state.get("is_mobile", False):
+    page = st.radio(
+        "🌿 Explore DermaBot",
+        [
+            "Home",
+            "Skincare FAQ",
+            "Routine Generator",
+            "Skin Concerns"
+        ],
+        horizontal=True
+    )
+else:
+    page = st.sidebar.radio(
+        "🌿 Choose a feature",
+        [
+            "Home",
+            "Skincare FAQ",
+            "Routine Generator",
+            "Skin Concerns"
+        ]
+    )
+
 
 
 st.markdown("""
@@ -106,7 +120,13 @@ st.markdown("""
 
 /* Sidebar */
 [data-testid="stSidebar"] {
-    background-color: #F3E3DC;
+    background: linear-gradient(180deg, #F3E3DC, #F8EEE8);
+    border-right: 1px solid #E8D5CA;
+}
+
+/* Sidebar navigation text */
+[data-testid="stSidebar"] * {
+    color: #4A403A;
 }
 
 /* Headings */
@@ -115,24 +135,69 @@ h1, h2, h3, h4 {
     font-family: Georgia, serif !important;
 }
 
+/* Paragraph text */
+p, label, .stMarkdown {
+    color: #5B5049;
+}
+
 /* Buttons */
 .stButton button {
     background-color: #A3B18A !important;
     color: white !important;
     border: none !important;
-    border-radius: 10px !important;
+    border-radius: 12px !important;
+    padding: 9px 20px !important;
+    font-weight: 600 !important;
+    transition: 0.3s ease;
+}
+
+.stButton button:hover {
+    background-color: #71805C !important;
+    transform: translateY(-2px);
 }
 
 /* Input boxes */
-.stTextInput input {
+.stTextInput input,
+.stTextArea textarea,
+.stSelectbox div[data-baseweb="select"] {
     background-color: white !important;
     color: #4A403A !important;
     border: 1px solid #D8C8BD !important;
-    border-radius: 8px !important;
+    border-radius: 10px !important;
+}
+
+/* Cards and containers */
+div[data-testid="stVerticalBlockBorderWrapper"] {
+    background-color: #FFFCF8;
+    border: 1px solid #E8D5CA;
+    border-radius: 16px;
+    padding: 10px;
+}
+
+/* Section spacing */
+div[data-testid="stVerticalBlock"] {
+    gap: 1rem;
+}
+
+/* Horizontal separators */
+hr {
+    border-color: #E8D5CA;
+}
+
+/* Expander */
+.streamlit-expanderHeader {
+    background-color: #F3E3DC;
+    border-radius: 10px;
+}
+
+/* Smooth page appearance */
+.stApp {
+    transition: background-color 0.3s ease;
 }
 
 </style>
 """, unsafe_allow_html=True)
+
 # Home
 
 
